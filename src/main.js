@@ -6,15 +6,18 @@ import './assets/less/index.less'
 // 引入路由 
 import router from '@/router'; 
 //引入仓库 
-import store from '@/store'
-// //引入全局组件 
-// import Navmenu from './pages/Home/Navmenu';
+import store from '@/store' 
+//引入axios 
+import http from 'axios' 
+//引入mock 
+import './api/mock.js'
+
 
 Vue.config.productionTip = false 
 
-Vue.use(ElementUI); 
-// //注册全局组件：（组件名称，哪一个组件）
-// Vue.component(Navmenu.name,Navmenu); 
+Vue.use(ElementUI);  
+Vue.prototype.$http = http;
+
 
 new Vue({
   render: h => h(App),  
