@@ -4,7 +4,9 @@
       <Navmenu></Navmenu>
     </el-aside>
     <el-container>
-      <el-header>Header</el-header>
+      <el-header> 
+        <Header></Header>
+      </el-header>
       <el-main> 
         <router-view></router-view> 
       </el-main>
@@ -13,12 +15,14 @@
 </template>
 
 <script> 
-import Navmenu from '@/components/Navmenu' 
+import Navmenu from '@/components/Navmenu'  
+import Header from '@/components/Header'
 
 export default {
   name: "mains", 
   components:{ 
-    Navmenu, 
+    Navmenu,  
+    Header,
   }
 };
 </script>
