@@ -1,67 +1,68 @@
 <template>
-  <!-- 用户信息卡 -->
-  <el-row class="home" :gutter="20">
-    <el-col :span="8" style="margin-top: 20px">
-      <el-card shadow="hover">
-        <div class="user">
-          <img :src="userImg" />
-          <div class="userinfo">
-            <p class="name">Admin</p>
-            <p class="access">超级管理员</p>
+    <!-- 用户信息卡 -->
+    <el-row class="home" :gutter="20">
+      <el-col :span="8" style="margin-top: 20px">
+        <el-card shadow="hover">
+          <div class="user">
+            <img :src="userImg" />
+            <div class="userinfo">
+              <p class="name">Admin</p>
+              <p class="access">超级管理员</p>
+            </div>
           </div>
-        </div>
-        <div class="login-info">
-          <p>上次登录时间:<span>2022-7-16</span></p>
-          <p>上次登录地点:<span>长沙</span></p>
-        </div>
-      </el-card>
-      <!-- 购买统计表 -->
-      <el-card style="margin-top: 20px; height: 460px">
-        <el-table :data="tableData">
-          <el-table-column
-            v-for="(val, key) in tableLabel"
-            :key="key"
-            :prop="key"
-            :label="val"
+          <div class="login-info">
+            <p>上次登录时间:<span>2022-7-16</span></p>
+            <p>上次登录地点:<span>长沙</span></p>
+          </div>
+        </el-card>
+        <!-- 购买统计表 -->
+        <el-card style="margin-top: 20px; height: 460px">
+          <el-table :data="tableData">
+            <el-table-column
+              v-for="(val, key) in tableLabel"
+              :key="key"
+              :prop="key"
+              :label="val"
+            >
+            </el-table-column>
+          </el-table>
+        </el-card>
+      </el-col>
+      <el-col :span="16" style="margin-top: 20px">
+        <div class="num">
+          <el-card
+            v-for="item in countData"
+            :key="item.name"
+            :body-style="{ display: 'flex', padding: 0 }"
           >
-          </el-table-column>
-        </el-table>
-      </el-card>
-    </el-col>
-    <el-col :span="16" style="margin-top: 20px">
-      <div class="num">
-        <el-card
-          v-for="item in countData"
-          :key="item.name"
-          :body-style="{ display: 'flex', padding: 0 }"
-        >
-          <i
-            class="icon"
-            :class="`el-icon-${item.icon}`"
-            :style="{ background: item.color }"
-          ></i>
-          <div class="detail">
-            <p class="num">￥{{ item.value }}</p>
-            <p class="txt">{{ item.name }}</p>
-          </div>
+            <i
+              class="icon"
+              :class="`el-icon-${item.icon}`"
+              :style="{ background: item.color }"
+            ></i>
+            <div class="detail">
+              <p class="num">￥{{ item.value }}</p>
+              <p class="txt">{{ item.name }}</p>
+            </div>
+          </el-card>
+        </div>
+        <el-card style="height: 280px">
+          <Echart :chartData="echartData.order" style="height: 280px"></Echart>
         </el-card>
-      </div>
-      <el-card style="height: 280px">
-        <!-- <div style="height: 280px" ref="lineEcharts"></div> -->
-        <Echart :chartData="echartData.order" style="height: 280px"></Echart>
-      </el-card>
-      <div class="graph">
-        <el-card style="height: 260px">
-          <!-- <div style="height: 240px" ref="userEcharts"></div> --> 
-          <Echart :chartData="echartData.user" style="height: 240px"></Echart>
-        </el-card>
-        <el-card style="height: 260px"> 
-          <Echart :chartData="echartData.video" :isAxisChart="false" style="height: 240px"></Echart>
-          <!-- <div style="height: 240px" ref="videoEcharts"></div> -->
-        </el-card>
-      </div>
-    </el-col>
-  </el-row>
+        <div class="graph">
+          <el-card style="height: 260px">
+            <Echart :chartData="echartData.user" style="height: 240px"></Echart>
+          </el-card>
+          <el-card style="height: 260px">
+            <Echart
+              :chartData="echartData.video"
+              :isAxisChart="false"
+              style="height: 240px"
+            ></Echart>
+          </el-card>
+        </div>
+      </el-col>
+    </el-row>
 </template>
 
 <script>
@@ -261,19 +262,19 @@ export default {
         //     },
         //   ],
         // };
-        this.echartData.user.xData =  data.userData.map((item) => item.date);
+        this.echartData.user.xData = data.userData.map((item) => item.date);
         this.echartData.user.series = [
-            {
-              name: "新增用户",
-              data: data.userData.map((item) => item.new),
-              type: "bar",
-            },
-            {
-              name: "活跃用户",
-              data: data.userData.map((item) => item.active),
-              type: "bar",
-            },
-          ]
+          {
+            name: "新增用户",
+            data: data.userData.map((item) => item.new),
+            type: "bar",
+          },
+          {
+            name: "活跃用户",
+            data: data.userData.map((item) => item.active),
+            type: "bar",
+          },
+        ];
         // const userEchart = echarts.init(this.$refs.userEcharts);
         // userEchart.setOption(userOption);
 
@@ -297,13 +298,13 @@ export default {
         //       type: "pie",
         //     },
         //   ],
-        // };   
-        this.echartData.video.series =  [
-            {
-              data: data.videoData,
-              type: "pie",
-            },
-          ]
+        // };
+        this.echartData.video.series = [
+          {
+            data: data.videoData,
+            type: "pie",
+          },
+        ];
         // const videoEchart = echarts.init(this.$refs.videoEcharts);
         // videoEchart.setOption(videoOption);
       }
@@ -313,4 +314,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang='less' scoped>  
+.el-row{ 
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+</style>
