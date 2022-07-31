@@ -98,7 +98,7 @@ export default {
     clickMenu(item) {
       this.$router.push({
         name: item.name,
-      }); 
+      }).catch(err=>err); 
       this.$store.commit('SELECTMEUN',item)
     },
   },
