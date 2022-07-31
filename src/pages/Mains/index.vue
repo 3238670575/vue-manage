@@ -4,26 +4,29 @@
       <Navmenu></Navmenu>
     </el-aside>
     <el-container>
-      <el-header> 
+      <el-header>
         <Header></Header>
       </el-header>
-      <el-main> 
-        <router-view></router-view> 
+      <Tag></Tag>
+      <el-main>
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
-<script> 
-import Navmenu from '@/components/Navmenu'  
-import Header from '@/components/Header'
+<script>
+import Navmenu from "@/components/Navmenu";
+import Header from "@/components/Header";
+import Tag from "@/components/Tag";
 
 export default {
-  name: "mains", 
-  components:{ 
-    Navmenu,  
+  name: "mains",
+  components: {
+    Navmenu,
     Header,
-  }
+    Tag,
+  },
 };
 </script>
 
