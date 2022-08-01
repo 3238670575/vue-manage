@@ -32,10 +32,43 @@ const mutations = {
     const result = state.tabsList.findIndex((item) => item.name === val.name);
     state.tabsList.splice(result, 1);
   },
+  setMenu(state, val) {
+    state.menu = val;
+    Cookie.set("menu", JSON.stringify(val));
+  },
+  clearMenu(state) {
+    state.menu = [];
+    Cookie.remove("menu");
+  },
+  addMenu(state, router) {
+    if (!Cookie.get("menu")) {
+      return;
+    }
+    const menu = JSON.parse(Cookie.get("menu"));
+    state.menu = menu;
+    const menuArray = [];
+    menu.forEach((item) => {
+      if (item.children) {
+        item.children = item.children.map((item) => {
+          item.component = () => import(`../pages/${item.url}`);
+          return item;
+        });
+        menuArray.push(...item.children);
+      } else {
+        item.component = () => import(`../pages/${item.url}`);
+        menuArray.push(item);
+      }
+    });
+    //路由的动态添加
+    menuArray.forEach((item) => {
+      router.addRoute("Main", item);
+    });
+  },
 };
 // action:处理action，可以书写自己的业务逻辑，也可以处理异步
 const actions = {};
 const getters = {};
+import Cookie  from "js-cookie"
 export default {
   state,
   mutations,
