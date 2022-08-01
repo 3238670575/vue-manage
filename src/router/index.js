@@ -46,10 +46,15 @@ export default new VueRouter({
         },
       ],
     },
+    { 
+      path:'/login', 
+      name:'login', 
+      component:()=>import('../pages/Login')
+    },
     {
       //重定向，初始界面
       path: "*",
-      redirect: "/home",
+      redirect: "/login",
     },
   ],
 });
