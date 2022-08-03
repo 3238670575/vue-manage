@@ -31,12 +31,15 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+
 new Vue({
   render: (h) => h(App),
   // 注册路由
   router,
   //注册仓库
   store,
+  //动态添加路由
   created() {
     store.commit('addMenu', router)
   }
