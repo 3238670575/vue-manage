@@ -61,7 +61,7 @@ const mutations = {
     });
     //路由的动态添加
     menuArray.forEach((item) => {
-      router.addRoute("Main", item);
+      router.addRoute("Mains", item);
     });
   },
 };
