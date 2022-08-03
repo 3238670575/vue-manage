@@ -17,39 +17,40 @@ export default new VueRouter({
       path: "/mains",
       name: 'Mains',
       component: Mains,
+      redirect: '/home',
     //   路由嵌套
       children: [
-        {
-          path: "/home",
-          name:'home',
-          component: Home,
-        },  
-        {
-          path: "/user",
-          name:'user',
-          component: ()=>import('../pages/User'),
-        }, 
-        { 
-          path:'/mall', 
-          name:'mall', 
-          component:()=>import('../pages/Mall')
-        }, 
-        { 
-          path:'/page1', 
-          name:'page1', 
-          component:()=>import('../pages/Other/pageone.vue')
-        }, 
-        { 
-          path:'/page2', 
-          name:'page2', 
-          component:()=>import('../pages/Other/pagetwo.vue')
-        },
+        // {
+        //   path: "/home",
+        //   name:'home',
+        //   component: Home,
+        // },  
+        // {
+        //   path: "/user",
+        //   name:'user',
+        //   component: ()=>import('../pages/User'),
+        // }, 
+        // { 
+        //   path:'/mall', 
+        //   name:'mall', 
+        //   component:()=>import('../pages/Mall')
+        // }, 
+        // { 
+        //   path:'/page1', 
+        //   name:'page1', 
+        //   component:()=>import('../pages/Other/pageone.vue')
+        // }, 
+        // { 
+        //   path:'/page2', 
+        //   name:'page2', 
+        //   component:()=>import('../pages/Other/pagetwo.vue')
+        // },
       ],
     },
     { 
       path:'/login', 
       name:'login', 
-      component:()=>import('../pages/Login')
+      component:()=>import('../pages/Login/index.vue')
     },
     {
       //重定向，初始界面
